@@ -1,5 +1,5 @@
 // client/src/pages/ReservationsPage.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import styles from './ReservarPage.module.css';
 import { createReservation, validarCodigoPromocion, getServiciosByHotel, getAvailableRooms } from '../services/reservasService';
@@ -37,6 +37,28 @@ const ReservationsPage = () => {
     const [isChecking, setIsChecking] = useState(false);
     const [isAvailable, setIsAvailable] = useState(true);
     const [availabilityMessage, setAvailabilityMessage] = useState('');
+    const [inputErrors, setInputErrors] = useState({}); // Estado para errores de validación local
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const validateDates = useCallback((start, end) => {
+        let errors = {};
+        
+
+        if (!start) {
+            errors.checkIn = 'La fecha de check-in es obligatoria.';
+        } else if (start < today) {
+            errors.checkIn = 'No se puede seleccionar una fecha pasada.';
+        }
+
+        if (!end) {
+            errors.checkOut = 'La fecha de check-out es obligatoria.';
+        } else if (start && end && new Date(end) <= new Date(start)) {
+            errors.checkOut = 'La fecha de check-out debe ser posterior a la de check-in.';
+        }
+        setInputErrors(prev => ({...prev, ...errors}));
+        return Object.keys(errors).length === 0;
+    }, [today]);
 
     useEffect(() => {
         // --- CORRECCIÓN: Se pasa el ID del hotel (preselectedRoom.hotel_id._id), no el objeto completo ---
@@ -64,10 +86,8 @@ const ReservationsPage = () => {
     useEffect(() => {
         const checkAvailability = async () => {
             if (checkIn && checkOut && preselectedRoom?._id) {
-                const d1 = new Date(checkIn);
-                const d2 = new Date(checkOut);
-
-                if (d2 <= d1) {
+                const datesAreValid = validateDates(checkIn, checkOut);
+                if (!datesAreValid) {
                     setIsAvailable(false);
                     setAvailabilityMessage('');
                     return;
@@ -102,7 +122,7 @@ const ReservationsPage = () => {
         }, 500);
 
         return () => clearTimeout(timer);
-    }, [checkIn, checkOut, preselectedRoom]);
+    }, [checkIn, checkOut, preselectedRoom, validateDates]);
 
 
     useEffect(() => {
@@ -131,19 +151,33 @@ const ReservationsPage = () => {
     };
 
     const handleApplyPromo = async () => {
-        if (!promoCodeInput) return;
+        if (!promoCodeInput) {
+            setPromoError('Por favor, ingresa un código de promoción.');
+            setAppliedPromo(null);
+            return;
+        }
         setPromoError(''); setAppliedPromo(null);
         try {
             const res = await validarCodigoPromocion(promoCodeInput);
             setAppliedPromo(res.data);
+            setNotification({ show: true, message: '¡Código aplicado!', type: 'success' });
         } catch (err) {
             setPromoError(err.response?.data?.message || 'Error al validar.');
+            setNotification({ show: true, message: 'Código no válido o expirado.', type: 'error' });
         }
     };
 
     const handleConfirm = async () => {
+        setError(''); // Limpiar errores previos
+
+        const datesValid = validateDates(checkIn, checkOut);
+        if (!datesValid) {
+            setError('Por favor, corrige las fechas de reserva.');
+            return;
+        }
+
         if (noches <= 0) {
-            setError('Por favor, selecciona un rango de fechas válido.');
+            setError('Debes seleccionar al menos una noche para la reserva.');
             return;
         }
         if (!isAvailable) {
@@ -162,7 +196,7 @@ const ReservationsPage = () => {
             setNotification({ show: true, message: '¡Reserva confirmada con éxito!', type: 'success' });
             setTimeout(() => navigate('/mis-reservas'), 3000);
         } catch (err) {
-            setError(err.response?.data?.message || 'No se pudo completar la reserva.');
+            setError(err.response?.data?.message || 'No se pudo completar la reserva. Inténtalo de nuevo más tarde.');
         } finally {
             setLoading(false);
         }
@@ -190,9 +224,42 @@ const ReservationsPage = () => {
                 <div className={styles.bookingCard}>
                     <div className={styles.stepHeader}><span className={styles.stepNumber}>2</span><h2>Elige tus Fechas</h2></div>
                     <div className={styles.datePickerGroup}>
-                        <div className={styles.dateInput}><label htmlFor="checkin">Check-in</label><input type="date" id="checkin" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} min={new Date().toISOString().split('T')[0]}/></div>
+                        <div className={styles.dateInput}>
+                            <label htmlFor="checkin">Check-in</label>
+                            <input 
+                                type="date" 
+                                id="checkin" 
+                                value={checkIn} 
+                                onChange={(e) => {
+                                    setCheckIn(e.target.value);
+                                    validateDates(e.target.value, checkOut); // Validar al cambiar
+                                }} 
+                                min={today}
+                                required 
+                                className={inputErrors.checkIn ? styles.inputError : ''}
+                                onBlur={() => validateDates(checkIn, checkOut)} // Validar al perder foco
+                            />
+                            {inputErrors.checkIn && <p className={styles.inputErrorMessage}>{inputErrors.checkIn}</p>}
+                        </div>
                         <div className={styles.arrow}>→</div>
-                        <div className={styles.dateInput}><label htmlFor="checkout">Check-out</label><input type="date" id="checkout" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} min={checkIn} disabled={!checkIn} /></div>
+                        <div className={styles.dateInput}>
+                            <label htmlFor="checkout">Check-out</label>
+                            <input 
+                                type="date" 
+                                id="checkout" 
+                                value={checkOut} 
+                                onChange={(e) => {
+                                    setCheckOut(e.target.value);
+                                    validateDates(checkIn, e.target.value); // Validar al cambiar
+                                }} 
+                                min={checkIn || today} 
+                                disabled={!checkIn} 
+                                required 
+                                className={inputErrors.checkOut ? styles.inputError : ''}
+                                onBlur={() => validateDates(checkIn, checkOut)} // Validar al perder foco
+                            />
+                            {inputErrors.checkOut && <p className={styles.inputErrorMessage}>{inputErrors.checkOut}</p>}
+                        </div>
                     </div>
                     {isChecking && <p style={{textAlign: 'center', marginTop: '1rem'}}>Verificando disponibilidad...</p>}
                     {availabilityMessage && <p className={styles.errorMessage} style={{marginTop: '1rem'}}>{availabilityMessage}</p>}
@@ -216,7 +283,13 @@ const ReservationsPage = () => {
                 <div className={styles.bookingCard}>
                     <div className={styles.stepHeader}><span className={styles.stepNumber}>4</span><h2>Código de Promoción</h2></div>
                     <div className={styles.promoInputGroup}>
-                        <input type="text" value={promoCodeInput} onChange={e => setPromoCodeInput(e.target.value.toUpperCase())} placeholder="Escribe tu código aquí" />
+                        <input 
+                            type="text" 
+                            value={promoCodeInput} 
+                            onChange={e => setPromoCodeInput(e.target.value.toUpperCase())} 
+                            placeholder="Escribe tu código aquí" 
+                            className={promoError ? styles.inputError : ''}
+                        />
                         <button onClick={handleApplyPromo}>Aplicar</button>
                     </div>
                     {promoError && <p className={styles.promoError}>{promoError}</p>}
@@ -237,7 +310,7 @@ const ReservationsPage = () => {
                 {error && <p className={styles.errorMessage}>{error}</p>}
                 <button 
                     onClick={handleConfirm} 
-                    disabled={loading || noches <= 0 || isChecking || !isAvailable}
+                    disabled={loading || noches <= 0 || isChecking || !isAvailable || Object.keys(inputErrors).some(key => inputErrors[key])}
                     className={styles.confirmButton}
                 >
                     {loading ? 'Procesando...' : 'Confirmar y Reservar'}

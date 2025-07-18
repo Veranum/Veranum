@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
-import styles from './ReservaModal.module.css';
+import React, { useState, useEffect } from 'react';
+import styles from './ReservaModal.module.css'; // Reutilizamos estilos del modal principal
 
 const StockUpdateModal = ({ show, onClose, onUpdate, insumo }) => {
     const [cantidad, setCantidad] = useState(1);
+    const [inputError, setInputError] = useState('');
+
+    useEffect(() => {
+        if (show) {
+            setCantidad(1); // Resetear cantidad al abrir
+            setInputError(''); // Limpiar errores al abrir
+        }
+    }, [show]);
 
     if (!show) return null;
 
-    // Llama a la función onUpdate con un valor positivo para sumar o negativo para restar
+    const handleQuantityChange = (e) => {
+        const value = Number(e.target.value);
+        if (isNaN(value) || value <= 0) {
+            setInputError('La cantidad debe ser un número positivo.');
+        } else {
+            setInputError('');
+            setCantidad(value);
+        }
+    };
+
     const handleUpdate = (factor) => {
+        if (inputError || cantidad <= 0) {
+            alert('Por favor, ingrese una cantidad válida y positiva.');
+            return;
+        }
         onUpdate(cantidad * factor);
     };
 
@@ -21,13 +42,17 @@ const StockUpdateModal = ({ show, onClose, onUpdate, insumo }) => {
                     <input 
                         type="number" 
                         value={cantidad} 
-                        onChange={(e) => setCantidad(Number(e.target.value))} 
+                        onChange={handleQuantityChange} 
+                        onBlur={handleQuantityChange} // Validar al perder el foco
                         min="1" 
+                        required
+                        className={inputError ? styles.inputError : (cantidad > 0 ? styles.inputSuccess : '')}
                     />
+                    {inputError && <p className={styles.inputErrorMessage}>{inputError}</p>}
                 </div>
                 <div className={styles.buttonGroup}>
-                    <button onClick={() => handleUpdate(-1)} className={styles.cancelButton}>Restar Cantidad</button>
-                    <button onClick={() => handleUpdate(1)}>Añadir Cantidad</button>
+                    <button onClick={() => handleUpdate(-1)} className={styles.cancelButton} disabled={inputError || cantidad <= 0 || (insumo?.stock - cantidad < 0)}>Restar Cantidad</button>
+                    <button onClick={() => handleUpdate(1)} disabled={inputError || cantidad <= 0}>Añadir Cantidad</button>
                 </div>
                 <button type="button" onClick={onClose} style={{marginTop: '1rem', width: '100%'}}>Cerrar</button>
             </div>

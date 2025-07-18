@@ -10,12 +10,49 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [inputErrors, setInputErrors] = useState({}); // Nuevo estado para errores de validación
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const validateInput = (name, value) => {
+    let errorMessage = '';
+    if (name === 'identificador') {
+      if (!value) {
+        errorMessage = 'El RUN o Correo Electrónico es obligatorio.';
+      }
+    } else if (name === 'password') {
+      if (!value) {
+        errorMessage = 'La contraseña es obligatoria.';
+      }
+    }
+    setInputErrors(prev => ({ ...prev, [name]: errorMessage }));
+    return errorMessage === '';
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'identificador') {
+      setIdentificador(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+    validateInput(name, value);
+    // Limpiar error general al cambiar cualquier input
+    setError('');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    const isIdentificadorValid = validateInput('identificador', identificador);
+    const isPasswordValid = validateInput('password', password);
+
+    if (!isIdentificadorValid || !isPasswordValid) {
+      setError('Por favor, complete todos los campos requeridos correctamente.');
+      return;
+    }
+
     try {
       await login(identificador, password);
       navigate('/');
@@ -38,11 +75,15 @@ const LoginPage = () => {
             <input 
               type="text" 
               id="identificador"
+              name="identificador"
               value={identificador} 
-              onChange={(e) => setIdentificador(e.target.value)} 
+              onChange={handleInputChange} 
               placeholder="12345678-9 o tu@email.com" 
               required 
+              className={inputErrors.identificador ? styles.inputError : ''}
+              onBlur={() => validateInput('identificador', identificador)} // Validar al perder el foco
             />
+            {inputErrors.identificador && <p className={styles.inputErrorMessage}>{inputErrors.identificador}</p>}
           </div>
           
           <div className={styles.inputGroup}>
@@ -51,10 +92,13 @@ const LoginPage = () => {
               <input 
                 type={showPassword ? "text" : "password"}
                 id="password"
+                name="password"
                 value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
+                onChange={handleInputChange} 
                 placeholder="********"
                 required 
+                className={inputErrors.password ? styles.inputError : ''}
+                onBlur={() => validateInput('password', password)} // Validar al perder el foco
               />
               <button 
                 type="button" 
@@ -65,6 +109,7 @@ const LoginPage = () => {
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
+            {inputErrors.password && <p className={styles.inputErrorMessage}>{inputErrors.password}</p>}
           </div>
           
           <button type="submit" className={styles.submitButton}>Iniciar Sesión</button>
