@@ -1,0 +1,166 @@
+.bookingPageLayout {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding-bottom: 4rem;
+}
+
+.bookingCard {
+    background: var(--color-surface);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--veranum-blue);
+}
+
+.stepHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.stepNumber {
+    background-color: var(--veranum-blue);
+    color: var(--white);
+    font-weight: 700;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.stepHeader h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.roomInfo {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.roomImage {
+    width: 150px;
+    height: 100px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.roomDetails p {
+    margin: 0.25rem 0 0 0;
+    color: var(--color-text-muted);
+}
+
+.datePickerGroup {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.dateInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.dateInput label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    margin-top: 1.5rem;
+}
+
+.servicesSection { margin-top: 1.5rem; }
+.servicesList { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.serviceItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.serviceItem:hover {
+    background-color: var(--color-background);
+}
+
+.serviceItem input {
+    margin-right: 1rem;
+    transform: scale(1.2);
+}
+
+.serviceInfo {
+    flex-grow: 1;
+}
+
+.servicePrice {
+    font-weight: 600;
+}
+
+.promoInputGroup {
+    display: flex;
+    gap: 0.5rem;
+}
+.promoInputGroup input { flex-grow: 1; }
+.promoInputGroup button {
+    background-color: var(--veranum-blue);
+    color: var(--white);
+    flex-shrink: 0;
+}
+
+.promoError { color: var(--error-red); font-size: 0.9rem; margin-top: 0.5rem; }
+.promoSuccess { color: var(--success-green); font-size: 0.9rem; margin-top: 0.5rem; }
+
+.priceSummary { border-left-color: var(--action-amber); }
+.priceRow { display: flex; justify-content: space-between; padding: 0.5rem 0; }
+.discountRow { color: var(--success-green); }
+.divider { border: none; border-top: 1px solid var(--color-border); margin: 1rem 0; }
+.totalRow { font-size: 1.5rem; font-weight: 700; }
+
+.errorMessage {
+    background-color: var(--error-red-light);
+    color: var(--error-red-dark);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.confirmButton {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+}
+.confirmButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+}
+
+@media (max-width: 500px) {
+    .roomInfo {
+        flex-direction: column;
+    }
+    .datePickerGroup {
+        grid-template-columns: 1fr;
+    }
+    .arrow { display: none; }
+}

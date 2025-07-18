@@ -1,0 +1,99 @@
+.eventPage {
+    background-color: var(--color-background);
+}
+
+.heroSection {
+    position: relative;
+    padding: 5rem 2rem;
+    text-align: center;
+    background-image: url('https://cache.marriott.com/content/dam/marriott-renditions/SCLWH/sclwh-wedding-5860-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1920px:*');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    margin-bottom: 4rem;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 50, 70, 0.65);
+}
+
+.heroTitle {
+
+    color: var(--white);
+    position: relative;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+
+
+}
+
+.heroSubtitle {
+    position: relative;
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0.5rem auto 0;
+    opacity: 0.9;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.5rem;
+    padding-bottom: 4rem;
+    margin: 0 auto;
+    max-width: 1200px;
+    
+}
+
+.eventCard {
+    background: var(--color-surface);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.eventCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 95, 115, 0.15);
+}
+
+.cardImage { height: 220px; overflow: hidden; }
+.cardImage img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.eventCard:hover .cardImage img { transform: scale(1.05); }
+
+.cardContent { padding: 1.5rem; flex-grow: 1; }
+.cardTitle { margin: 0 0 0.75rem 0; font-size: 1.5rem; color: var(--color-text-header); }
+.cardLocation, .cardStats { display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+.cardLocation svg, .cardStats svg { color: var(--veranum-blue); flex-shrink: 0; }
+
+.equipmentSection { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.equipmentSection p { font-weight: 600; margin: 0 0 0.75rem 0; font-size: 0.9rem; }
+.equipmentList { list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: var(--color-text-body); display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.equipmentList li { display: flex; align-items: center; gap: 0.5rem; }
+.equipmentList svg { color: var(--success-green); flex-shrink: 0; }
+
+.cardFooter { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background-color: var(--color-background); border-top: 1px solid var(--color-border); }
+.priceInfo { font-size: 1rem; color: var(--color-text-body); }
+.priceInfo span { font-weight: 700; font-size: 1.3rem; color: var(--color-text-header); }
+
+.ctaButton {
+    background-color: var(--veranum-blue);
+    color: var(--white);
+    text-decoration: none;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.ctaButton:hover { background-color: var(--color-button-primary-hover-bg); }
+
+.loadingMessage, .errorMessage { text-align: center; padding: 4rem 0; font-size: 1.1rem; color: var(--color-text-muted); }
+.errorMessage { color: var(--error-red); }

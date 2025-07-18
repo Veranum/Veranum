@@ -1,0 +1,134 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-weight: 600;
+}
+
+/* --- Estilos de la Grilla de Tarjetas --- */
+.promoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.promoCard {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.promoCode {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--veranum-blue);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.status_activa { background-color: var(--success-green-light); color: var(--success-green-dark); }
+.status_inactiva { background-color: var(--neutral-200); color: var(--color-text-muted); }
+
+.cardBody {
+    padding: 1.25rem;
+    flex-grow: 1;
+}
+
+.description {
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+    color: var(--color-text-body);
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-border-light);
+}
+
+.details span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border);
+}
+
+.discount {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--action-amber);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.actions button {
+    background: none;
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.toggleButton {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 0.8rem;
+}
+
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }

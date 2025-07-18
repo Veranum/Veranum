@@ -1,0 +1,136 @@
+/* client/src/pages/ManageTiposInsumoPage.module.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+.createButton:hover {
+    background-color: #ffb703;
+}
+
+.filtersContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: end;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputGroup label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding-left: 0.2rem;
+}
+
+.inputIconWrapper {
+    position: relative;
+}
+
+.inputIconWrapper svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+
+.inputGroup input,
+.inputGroup select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.inputIconWrapper input {
+    padding-left: 45px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+}
+
+.tipoCard {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.tipoCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+    border-color: var(--veranum-blue);
+}
+
+.tipoName {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text-header);
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editButton, .deleteButton {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }
+
+.noResults {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 4rem 0;
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+}

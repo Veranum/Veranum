@@ -1,0 +1,185 @@
+/* client/src/pages/LoginPage.module.css */
+
+/* Contenedor principal de la página */
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Ajustado para que no ocupe toda la altura si hay header/footer */
+  background-color: #f4f6f8;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Tarjeta contenedora del formulario (Login y Registro) */
+.loginCard, .registerCard {
+  background-color: #ffffff;
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.registerCard {
+  max-width: 480px; /* Un poco más ancho para el formulario de registro */
+}
+
+/* Título principal */
+.loginCard h2, .registerCard h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--veranum-blue, #003366); /* Usa la variable de color si existe */
+  margin-bottom: 0.75rem;
+}
+
+/* Subtítulo */
+.loginCard .subtitle, .registerCard .subtitle {
+  color: var(--color-text-muted, #6c757d);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+/* Formulario */
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Grupo de entrada (label + input) */
+.inputGroup {
+  margin-bottom: 1.25rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-body, #495057);
+  font-size: 0.875rem;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.inputGroup input:focus {
+  border-color: var(--veranum-blue, #003366);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.2);
+}
+
+/* Contenedor para el input de contraseña y el toggle */
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInputContainer input {
+  padding-right: 3rem; /* Espacio para el icono */
+}
+
+/* Botón para mostrar/ocultar contraseña */
+.passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.passwordToggle:hover {
+  color: var(--veranum-blue, #003366);
+}
+
+/* Botón de enviar formulario */
+.submitButton {
+  padding: 0.9rem 1.5rem;
+  background-color: var(--color-button-primary-bg, #003366);
+  color: var(--color-button-primary-text, #ffffff);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.submitButton:hover {
+  background-color: var(--color-button-primary-hover-bg, #002244);
+  transform: translateY(-2px);
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mensaje de error */
+.errorMessage {
+  color: #842029;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Enlace para cambiar entre Login y Registro */
+.switchFormLink {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--color-text-muted, #6c757d);
+}
+
+.switchFormLink a {
+  color: var(--color-text-link, #003366);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.switchFormLink a:hover {
+  text-decoration: underline;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 576px) {
+  .pageContainer {
+    padding: 1rem 0;
+    align-items: flex-start;
+  }
+  
+  .loginCard, .registerCard {
+    margin: 0;
+    padding: 2rem 1.5rem;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    min-height: 80vh;
+  }
+}

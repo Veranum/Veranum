@@ -1,0 +1,362 @@
+/* client/src/pages/ManageReservasPage.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.createButton:hover {
+    background-color: #ffb703;
+}
+
+.hotelSelectorContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.hotelSelectorContainer label {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.hotelSelectorContainer select {
+    flex-grow: 1;
+    max-width:300px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.filtersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.filterBar {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 1.5rem;
+    align-items: end;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputGroup label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding-left: 0.2rem;
+}
+
+.inputIconWrapper {
+    position: relative;
+}
+
+.inputIconWrapper svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+
+.inputGroup input,
+.inputGroup select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.inputIconWrapper input {
+    padding-left: 45px;
+}
+
+.clearButtonWrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.clearFiltersButton {
+    background-color: rgb(205, 206, 207);
+    color: var(--error-red-dark);
+    border: 1px solid transparent;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearFiltersButton:hover {
+    background-color: var(--error-red);
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .filterBar {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .filterBar {
+        grid-template-columns: 1fr;
+    }
+}
+
+.reservasGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.reservaCard {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+}
+
+.selectedCard {
+    box-shadow: 0 0 0 2px var(--veranum-blue);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.headerInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.reservaId {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardCheckbox {
+    transform: scale(1.4);
+    accent-color: var(--veranum-blue);
+    cursor: pointer;
+}
+
+.status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status_confirmado { background-color: var(--success-green-light); color: var(--success-green-dark); }
+.status_cancelado { background-color: var(--error-red-light); color: var(--error-red-dark); }
+.status_pendiente { background-color: var(--warning-yellow-light); color: var(--warning-yellow-dark); }
+
+.cardBody {
+    padding: 1.25rem;
+    flex-grow: 1;
+}
+
+.cardBody h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.details span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editButton, .deleteButton {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }
+
+.errorMessage, .noResults {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--color-background-muted);
+    color: var(--color-text-muted);
+    border-radius: var(--border-radius);
+}
+
+.errorMessage {
+    background-color: var(--error-red-light);
+    color: var(--error-red-dark);
+}
+
+.serviceDivider {
+    border: none;
+    border-top: 1px solid var(--color-border-light);
+    margin: 0.75rem 0;
+}
+
+.servicesInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.servicesInfo > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.servicesInfo svg {
+    color: var(--action-amber);
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.servicesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.serviceItem {
+    background-color: var(--color-background);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--color-border-light);
+}
+
+.bulkActionsBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 2.5rem;
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--veranum-blue);
+}
+
+.selectAllGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.selectAllGroup label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.selectAllGroup input[type="checkbox"] {
+    transform: scale(1.4);
+    accent-color: var(--veranum-blue);
+    cursor: pointer;
+}
+
+.bulkActionsButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.bulkDeleteButton {
+    background-color: var(--error-red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+} 

@@ -1,0 +1,186 @@
+/* client/src/pages/ManageServiciosPage.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.createButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+}
+
+.createButton:hover:not(:disabled) {
+    background-color: #ffb703;
+}
+
+.hotelSelectorContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.hotelSelectorContainer label {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.hotelSelectorContainer select {
+    flex-grow: 1;
+    max-width: 400px;
+    padding: 0.8rem;
+    font-size: 1rem;
+}
+
+.filtersContainer {
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.searchWrapper label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding-left: 0.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.inputIconWrapper {
+    position: relative;
+}
+
+.searchWrapper svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+
+.searchWrapper input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    padding-left: 45px;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+}
+
+/* Grilla de tarjetas de servicio */
+.serviceGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.serviceCard {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.serviceName {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text-header);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.serviceName svg {
+    color: var(--action-amber);
+}
+
+.cardBody {
+    padding: 1.25rem;
+    flex-grow: 1;
+    color: var(--color-text-body);
+}
+
+.cardBody p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editButton, .deleteButton {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }
+
+.errorMessage, .noResults {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--color-background-muted);
+    color: var(--color-text-muted);
+    border-radius: var(--border-radius);
+}
+
+.errorMessage {
+    background-color: var(--error-red-light);
+    color: var(--error-red-dark);
+}

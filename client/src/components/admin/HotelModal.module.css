@@ -1,0 +1,28 @@
+.inputGroup input,
+.inputGroup select,
+.fullWidth input,
+.fullWidth textarea {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; /* Asegura que los inputs ocupen el ancho de su contenedor */
+    box-sizing: border-box; /* Incluye el padding y el border en el ancho total */
+}
+
+.inputGroup textarea,
+.fullWidth textarea {
+    resize: vertical; /* Permite redimensionar verticalmente los textarea */
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.fullWidth input:focus,
+.fullWidth textarea:focus {
+    outline: none;
+    border-color: var(--veranum-blue);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}

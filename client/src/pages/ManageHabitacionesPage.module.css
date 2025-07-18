@@ -1,0 +1,234 @@
+/* client/src/pages/ManageHabitacionesPage.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.createButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+}
+
+.createButton:hover:not(:disabled) {
+    background-color: #ffb703;
+}
+
+.hotelSelectorContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem; /* Reducido para acercar a los filtros */
+}
+
+.hotelSelectorContainer label {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.hotelSelectorContainer select {
+    flex-grow: 1;
+    max-width: 400px;
+    padding: 0.8rem;
+    font-size: 1rem;
+}
+
+/* --- ESTILOS DE FILTROS ACTUALIZADOS --- */
+.filtersContainer {
+    display: flex;
+    flex-wrap: wrap; /* Usa wrap para responsividad */
+    gap: 1rem;
+    align-items: flex-end; /* Alinea los elementos en la base */
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.searchWrapper {
+    flex: 2 1 300px; /* Permite que crezca y tenga una base de 300px */
+}
+
+.searchWrapper .inputIconWrapper {
+    position: relative;
+}
+
+.searchWrapper svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+
+.searchWrapper input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    padding-left: 45px;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.filterGroup {
+    display: flex;
+    gap: 1rem;
+    flex:  1 400px; /* Permite que el grupo crezca */
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1; /* Permite que cada grupo de input crezca por igual */
+}
+
+.inputGroup label, .searchWrapper > label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding-left: 0.2rem;
+}
+
+.inputGroup select {
+    width: 101%;
+    padding: 0.8rem;
+    background-color: var(--color-surface);
+    font-size: 0.95rem;
+}
+/* --- FIN DE ESTILOS DE FILTROS --- */
+
+.habitacionesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.habitacionCard {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.habitacionId {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status_disponible { background-color: var(--success-green-light); color: var(--success-green-dark); }
+.status_reservada { background-color: var(--warning-yellow-light); color: var(--warning-yellow-dark); }
+.status_ocupada { background-color: var(--error-red-light); color: var(--error-red-dark); }
+
+
+.cardBody {
+    padding: 1.25rem;
+    flex-grow: 1;
+}
+
+.cardBody h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+}
+
+.details {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.details span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editButton, .deleteButton {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }
+
+.errorMessage, .noResults {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--color-background-muted);
+    color: var(--color-text-muted);
+    border-radius: var(--border-radius);
+}
+
+.errorMessage {
+    background-color: var(--error-red-light);
+    color: var(--error-red-dark);
+}

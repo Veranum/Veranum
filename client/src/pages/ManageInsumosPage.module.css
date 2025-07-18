@@ -1,0 +1,195 @@
+/* client/src/pages/ManageInsumosPage.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 { 
+    font-size: 2.2rem; 
+    margin: 0; 
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.createButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+}
+
+.createButton:hover:not(:disabled) {
+    background-color: #ffb703;
+}
+
+.filtersContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 1.5rem;
+    align-items: end;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 2rem;
+}
+
+.inputGroup label { 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+}
+
+.inputGroup input, .inputGroup select { 
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.insumoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.insumoCard {
+    display: flex;
+    flex-direction: column;
+    border-left: 5px solid var(--color-border-light);
+    transition: border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--color-surface);
+    border-radius: var(--border-radius);
+}
+
+.insumoCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow);
+}
+
+.stockBajo { 
+    border-left-color: var(--warning-yellow); 
+}
+
+.stockCritico { 
+    border-left-color: var(--error-red); 
+}
+
+.cardHeader { 
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.insumoNombre { 
+    margin: 0; 
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.cardBody { 
+    padding: 0.5rem 1.25rem; /* Ajuste de padding vertical */
+    flex-grow: 1; 
+}
+
+.detailRow { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--color-border-light); 
+    font-size: 0.95rem; 
+    gap: 1rem;
+}
+
+.detailRow:last-child { 
+    border-bottom: none; 
+}
+
+.detailLabel { /* Nueva clase para las etiquetas */
+    font-weight: 600; 
+    color: var(--color-text-muted); 
+    flex-shrink: 0; /* Evita que la etiqueta se encoja */
+}
+
+.detailValue { /* Nueva clase para los valores */
+    font-weight: 500;
+    text-align: right;
+    word-break: break-word; /* Evita que textos largos se desborden */
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.stockInfo { 
+    font-size: 1.5rem;
+    font-weight: 700; 
+}
+
+.stockInfo span { 
+    font-size: 0.9rem; 
+    font-weight: 400; 
+    color: var(--color-text-muted);
+    margin-left: 0.25rem; 
+}
+
+.actions { 
+    display: flex; 
+    gap: 0.5rem; 
+    align-items: center; 
+}
+
+.actions button { 
+    background: none; 
+    border: 1px solid var(--color-border); 
+    padding: 0.6rem;
+    cursor: pointer; 
+    border-radius: var(--border-radius); 
+    display: flex; 
+    align-items: center; 
+    transition: background-color 0.2s, color 0.2s; 
+}
+
+.stockButton { 
+    font-size: 0.85rem;
+    font-weight: 600; 
+    padding: 0.7rem 1.1rem;
+    background-color: var(--color-background);
+}
+
+.stockButton:hover {
+    border-color: var(--veranum-blue);
+    background-color: var(--color-primary-light);
+}
+
+.editButton { 
+    color: var(--veranum-blue); 
+}
+
+.editButton:hover { 
+    background-color: var(--color-primary-light); 
+}
+
+.deleteButton { 
+    color: var(--error-red); 
+}
+
+.deleteButton:hover { 
+    background-color: var(--error-red-light); 
+}

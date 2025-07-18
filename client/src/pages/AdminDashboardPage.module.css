@@ -1,0 +1,76 @@
+/* client/src/pages/AdminDashboardPage.module.css */
+.dashboardContainer {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: var(--color-text-header);
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.managementSection h2 {
+    font-size: 1.8rem;
+    color: var(--color-text-header);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.managementGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.managementCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--color-text-body);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    border-left: 5px solid transparent;
+}
+
+.managementCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-lg);
+    border-left-color: var(--veranum-blue);
+}
+
+.managementCard h3 {
+    font-size: 1.2rem;
+    color: var(--color-text-header);
+    margin: 0 0 0.25rem 0;
+}
+
+.managementCard p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.managementCard svg {
+    color: var(--color-text-muted);
+    transition: transform 0.2s;
+}
+
+.managementCard:hover svg {
+    transform: translateX(5px);
+    color: var(--veranum-blue);
+}

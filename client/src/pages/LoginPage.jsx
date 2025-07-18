@@ -1,0 +1,81 @@
+// client/src/pages/LoginPage.jsx
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import styles from './LoginPage.module.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
+const LoginPage = () => {
+  const [identificador, setIdentificador] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await login(identificador, password);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error al iniciar sesión. Verifique sus credenciales.');
+    }
+  };
+
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.loginCard}>
+        <h2>Bienvenido de Vuelta</h2>
+        <p className={styles.subtitle}>Accede a tu cuenta para gestionar tus reservas y perfil.</p>
+        
+        <form onSubmit={handleSubmit} className={styles.form}>
+          {error && <p className={styles.errorMessage}>{error}</p>}
+          
+          <div className={styles.inputGroup}>
+            <label htmlFor="identificador">RUN o Correo Electrónico</label>
+            <input 
+              type="text" 
+              id="identificador"
+              value={identificador} 
+              onChange={(e) => setIdentificador(e.target.value)} 
+              placeholder="12345678-9 o tu@email.com" 
+              required 
+            />
+          </div>
+          
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Contraseña</label>
+            <div className={styles.passwordInputContainer}>
+              <input 
+                type={showPassword ? "text" : "password"}
+                id="password"
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                placeholder="********"
+                required 
+              />
+              <button 
+                type="button" 
+                onClick={() => setShowPassword(!showPassword)}
+                className={styles.passwordToggle}
+                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
+            </div>
+          </div>
+          
+          <button type="submit" className={styles.submitButton}>Iniciar Sesión</button>
+        </form>
+        
+        <div className={styles.switchFormLink}>
+          ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;

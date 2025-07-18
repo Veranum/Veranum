@@ -1,0 +1,132 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+}
+
+/* --- ESTILOS PARA EL CONTENEDOR DE FILTROS --- */
+.filtersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.filterBar {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2 columnas, la primera el doble de ancha */
+    gap: 1.5rem;
+    align-items: end;
+}
+
+.inputGroup label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding-left: 0.2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.inputGroup input,
+.inputGroup select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* --- ESTILOS PARA LAS TARJETAS DE USUARIO --- */
+.userGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.userCard {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.userName {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text-header);
+}
+
+.role {
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: capitalize;
+}
+
+.role_admin { background-color: var(--error-red-light); color: var(--error-red-dark); }
+.role_gerente { background-color: var(--color-primary-light); color: var(--veranum-blue); }
+.role_cliente { background-color: var(--neutral-200); color: var(--color-text-muted); }
+
+.cardBody {
+    padding: 1.25rem;
+    flex-grow: 1;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: var(--color-text-body);
+    font-size: 0.9rem;
+}
+
+.details span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.reservationsInfo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.actions { display: flex; gap: 0.5rem; }
+.actions button { background: none; border: 1px solid transparent; border-radius: var(--border-radius); padding: 0.5rem; display: flex; align-items: center; cursor: pointer; }
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }

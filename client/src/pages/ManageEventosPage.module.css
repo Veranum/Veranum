@@ -1,0 +1,179 @@
+/* client/src/pages/ManageEventosPage.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h1 { font-size: 2.2rem; margin: 0; }
+
+.pageLayout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li button {
+    width: 100%;
+    padding: 1rem;
+    text-align: left;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar li button:hover {
+    border-color: var(--veranum-blue);
+    color: var(--veranum-blue);
+}
+
+.sidebar li button.active {
+    background-color: var(--veranum-blue);
+    border-color: var(--veranum-blue);
+    color: var(--white);
+    font-weight: 700;
+}
+
+.mainContentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.mainContentHeader h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.mainContentHeader button {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+}
+
+.arriendosGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.arriendoCard {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface);
+}
+
+.cardHeader, .cardFooter { background-color: transparent !important; }
+
+.cardHeader { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--color-border); }
+.clienteNombre { font-weight: 700; font-size: 1.2rem; }
+.status { padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 600; font-size: 0.8rem; text-transform: capitalize; }
+.status_confirmado { background-color: var(--success-green-light); color: var(--success-green-dark); }
+.status_cancelado { background-color: var(--error-red-light); color: var(--error-red-dark); }
+.status_pendiente { background-color: var(--warning-yellow-light); color: var(--warning-yellow-dark); }
+.cardBody { padding: 1.25rem; flex-grow: 1; }
+.detailRow { 
+    display: flex; 
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0; 
+    font-size: 0.95rem; 
+}
+.detailRow span {
+    font-weight: 500;
+}
+.detailRow svg {
+    color: var(--veranum-blue);
+    flex-shrink: 0;
+}
+.cardFooter { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; border-top: 1px solid var(--color-border); }
+.price { font-size: 1.2rem; font-weight: 700; }
+.actions { display: flex; gap: 0.5rem; }
+.actions button { background: none; border: 1px solid var(--color-border); padding: 0.5rem; cursor: pointer; border-radius: var(--border-radius); display: flex; align-items: center; transition: background-color 0.2s; }
+.editButton { color: var(--veranum-blue); }
+.editButton:hover { background-color: var(--color-primary-light); }
+.deleteButton { color: var(--error-red); }
+.deleteButton:hover { background-color: var(--error-red-light); }
+
+/* --- NUEVOS ESTILOS PARA FILTROS --- */
+.filtersContainer {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    align-items: end;
+}
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+.inputGroup label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+}
+.inputGroup input,
+.inputGroup select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+.inputIconWrapper {
+    position: relative;
+}
+.inputIconWrapper svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+.inputIconWrapper input {
+    padding-left: 45px;
+}
+.createButton {
+    background-color: var(--action-amber);
+    color: var(--neutral-900);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.createButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+}
+
+.createButton:hover:not(:disabled) {
+    background-color: #ffb703;
+}
