@@ -3,38 +3,34 @@
 require('dotenv').config({ path: '.env.test' }); // Asegura que las variables de entorno de prueba estén cargadas
 
 const request = require('supertest');
-const startApp = require('../../server'); // Importa la nueva función startApp
-const mongoose = require('mongoose');
-const User = require('../../modules/usuarios/usuarios.model'); 
+const { getTestApp, cleanTestCollections, closeDbConnection } = require('../test_utils'); // Importa las utilidades de test
+const User = require('../../modules/usuarios/usuarios.model'); // Importa el modelo User para operaciones directas en DB
 
-let appInstance; // Variable para mantener la instancia de la aplicación Express configurada para tests
+let app; // Esta variable contendrá la instancia de la aplicación Express ya configurada y conectada
 
 beforeAll(async () => {
-  // Inicia la aplicación Express, sobrescribiendo la URI de MongoDB con la de prueba,
-  // y sin iniciar el servidor HTTP (startListening: false).
-  appInstance = await startApp(process.env.MONGO_URI_TEST, false); 
+  // Obtiene la instancia completamente configurada de la aplicación Express
+  // que ya estará conectada a la base de datos de prueba.
+  app = await getTestApp(); 
   
-  // Limpia la colección de usuarios antes de que comiencen las pruebas de este suite
-  await User.deleteMany({}); 
+  // Limpia las colecciones relevantes de la base de datos antes de que comiencen todas las pruebas de este suite
+  await cleanTestCollections(); 
 });
 
 afterEach(async () => {
-  // Limpia la colección de usuarios después de cada test individual para asegurar aislamiento
-  await User.deleteMany({}); 
+  // Limpia las colecciones relevantes de la base de datos después de cada test individual para asegurar aislamiento.
+  // Esto es crucial para evitar interferencias entre tests.
+  await cleanTestCollections(); 
 });
 
 afterAll(async () => {
-  // Cierra la conexión de Mongoose después de que todas las pruebas en este suite terminen
-  if (mongoose.connection.readyState !== 0) { // Cierra solo si la conexión está abierta
-    await mongoose.connection.close(); 
-  }
+  // Cierra la conexión a la base de datos después de que todas las pruebas en este suite terminen.
+  await closeDbConnection(); 
 });
 
 describe('Auth API Integration Tests', () => {
-  // No necesitamos 'testUser' global aquí, ya que las pruebas se registran/limpian independientemente.
-
   it('should register a new user successfully', async () => {
-    const res = await request(appInstance) // Usa la instancia de la aplicación configurada
+    const res = await request(app) // Usa la instancia 'app' directamente que ya está conectada a la DB de prueba
       .post('/api/auth/register')
       .send({
         run_cliente: '12345678-9',
@@ -55,7 +51,7 @@ describe('Auth API Integration Tests', () => {
 
   it('should not register a user with duplicate RUN', async () => {
     // Primero, registra un usuario
-    await request(appInstance)
+    await request(app)
       .post('/api/auth/register')
       .send({
         run_cliente: '98765432-1',
@@ -66,7 +62,7 @@ describe('Auth API Integration Tests', () => {
       });
 
     // Intenta registrar otro con el mismo RUN
-    const res = await request(appInstance)
+    const res = await request(app)
       .post('/api/auth/register')
       .send({
         run_cliente: '98765432-1', // RUN duplicado
@@ -83,7 +79,7 @@ describe('Auth API Integration Tests', () => {
 
   it('should login a user with email successfully', async () => {
     // Registra un usuario para esta prueba específica
-    await request(appInstance)
+    await request(app)
       .post('/api/auth/register')
       .send({
         run_cliente: '22334455-6',
@@ -93,7 +89,7 @@ describe('Auth API Integration Tests', () => {
         rol: 'cliente',
       });
 
-    const res = await request(appInstance)
+    const res = await request(app)
       .post('/api/auth/login')
       .send({
         identificador: 'login.email@example.com',
@@ -107,7 +103,7 @@ describe('Auth API Integration Tests', () => {
 
   it('should login a user with RUN successfully', async () => {
     // Registra un usuario para esta prueba específica
-    await request(appInstance)
+    await request(app)
       .post('/api/auth/register')
       .send({
         run_cliente: '11223344-5',
@@ -117,10 +113,10 @@ describe('Auth API Integration Tests', () => {
         rol: 'cliente',
       });
 
-    const res = await request(appInstance)
+    const res = await request(app)
       .post('/api/auth/login')
       .send({
-        identificador: '11223344-5', // Usar el RUN como identificador
+        identificador: '11223344-5', 
         password: 'runpassword', 
       });
 
@@ -130,8 +126,7 @@ describe('Auth API Integration Tests', () => {
   });
 
   it('should not login with invalid credentials', async () => {
-    // No registrar un usuario para esta prueba
-    const res = await request(appInstance)
+    const res = await request(app)
       .post('/api/auth/login')
       .send({
         identificador: 'nonexistent@example.com',
@@ -144,8 +139,7 @@ describe('Auth API Integration Tests', () => {
   });
 
   it('should get authenticated user profile', async () => {
-    // Registrar y loguear un usuario para obtener un token
-    const registerRes = await request(appInstance)
+    const registerRes = await request(app)
       .post('/api/auth/register')
       .send({
         run_cliente: '77889900-1',
@@ -156,7 +150,7 @@ describe('Auth API Integration Tests', () => {
       });
     const token = registerRes.body.token;
 
-    const res = await request(appInstance)
+    const res = await request(app)
       .get('/api/auth/me')
       .set('Authorization', `Bearer ${token}`); 
 
@@ -169,7 +163,7 @@ describe('Auth API Integration Tests', () => {
   });
 
   it('should not get profile without token', async () => {
-    const res = await request(appInstance)
+    const res = await request(app)
       .get('/api/auth/me');
 
     expect(res.statusCode).toEqual(401);
@@ -178,7 +172,7 @@ describe('Auth API Integration Tests', () => {
   });
 
   it('should not get profile with invalid token', async () => {
-    const res = await request(appInstance)
+    const res = await request(app)
       .get('/api/auth/me')
       .set('Authorization', 'Bearer invalidtoken123'); 
 

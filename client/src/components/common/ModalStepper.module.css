@@ -1,0 +1,76 @@
+/* client/src/components/common/ModalStepper.module.css */
+.stepperContainer {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  position: relative; /* Para la línea que conecta los pasos */
+}
+
+/* Línea que conecta los pasos (simulada con un pseudo-elemento) */
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--neutral-300);
+  transform: translateY(-50%);
+  z-index: 0; /* Asegura que la línea esté detrás de los números */
+}
+
+.stepItem {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--neutral-200);
+  color: var(--neutral-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1; /* Asegura que los números estén sobre la línea */
+  border: 2px solid var(--neutral-300);
+  transition: all 0.3s ease;
+}
+
+.stepItem.active {
+  background-color: var(--veranum-blue);
+  color: var(--white);
+  border-color: var(--veranum-blue);
+  transform: scale(1.1);
+}
+
+.stepItem.completed {
+  background-color: var(--success-green);
+  color: var(--white);
+  border-color: var(--success-green);
+}
+
+.stepItem:hover:not(.active) {
+  border-color: var(--veranum-blue);
+  box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.1);
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 6px;
+  background-color: var(--neutral-200);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--veranum-blue);
+  border-radius: 3px;
+  transition: width 0.4s ease-in-out;
+}
