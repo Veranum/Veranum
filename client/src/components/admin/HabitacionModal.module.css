@@ -1,8 +1,25 @@
+/* client\src/components\admin\HabitacionModal.module.css */
 .formColumn {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    /* CAMBIO APLICADO: Reducir el espacio entre elementos de la columna */
+    gap: 0.75rem; /* Originalmente 1.25rem */
 }
+
+/* CAMBIO APLICADO: Añadir estilos para controlar el margen de los elementos de formulario dentro de inputGroup */
+.formColumn label {
+    margin-bottom: 0.25rem; /* Pequeño margen debajo de las etiquetas */
+    font-weight: 500; /* Hacer las etiquetas un poco más negritas si se desea */
+    color: var(--color-text-dark); /* Color de texto más oscuro para las etiquetas */
+}
+
+.formColumn input,
+.formColumn textarea,
+.formColumn select {
+    margin-bottom: 0.5rem; /* Pequeño margen debajo de los inputs */
+    padding: 0.6rem 0.8rem; /* Ajustar el padding si es necesario */
+}
+
 
 .imagePreview {
     width: 100%;
@@ -26,7 +43,8 @@
 .formSubGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    /* CAMBIO APLICADO: Reducir el espacio dentro del sub-grid */
+    gap: 0.75rem; /* Originalmente 1.5rem */
 }
 
 .buttonGroupFullWidth {

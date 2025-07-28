@@ -55,7 +55,7 @@ const HabitacionModal = ({ show, onClose, onSave, habitacion, hoteles, defaultHo
     }, [habitacion, show, hoteles, defaultHotelId]);
 
     if (!show) return null;
-
+    
     const validateField = (name, value) => {
         let errorMessage = '';
         if (!value && ['hotel_id', 'nombre', 'descripcion', 'categoria', 'capacidad', 'piso', 'cantidad', 'precio'].includes(name)) {
@@ -68,13 +68,17 @@ const HabitacionModal = ({ show, onClose, onSave, habitacion, hoteles, defaultHo
             if (name === 'cantidad' && numValue < 1) {
                 errorMessage = 'Debe haber al menos 1 habitación de este tipo.';
             }
-        } else if (name === 'imagenUrl' && value && !/^https?:\\+\\.(png|jpe?g|gif|webp)$/i.test(value)) {
-            // Se corrigió la expresión regular escapando las barras inclinadas dobles
-            errorMessage = 'URL de imagen no válida.';
+        } else if (name === 'imagenUrl' && value) {
+            // *** CAMBIO APLICADO AQUÍ: Nueva expresión regular para validar URLs de imagen ***
+            const urlRegex = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})$/i;
+            if (!urlRegex.test(value)) {
+                errorMessage = 'URL de imagen no válida. Asegúrate que empieza con http(s):// o www.';
+            }
         }
         setInputErrors(prev => ({ ...prev, [name]: errorMessage }));
         return errorMessage === '';
     };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;

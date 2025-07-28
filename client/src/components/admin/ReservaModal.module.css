@@ -35,261 +35,313 @@
     font-size: 1.8rem;
     color: var(--color-text-header);
     text-align: center;
+    margin-bottom: 2rem;
+}
+
+.formSection {
+    background-color: var(--color-background-elevated);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.formSection h3 {
+    color: var(--color-text-header);
     margin-top: 0;
-    margin-bottom: 2.5rem;
-    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.8rem;
 }
 
 .formGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    align-items: start;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+    gap: 1.5rem; /* Espacio entre las columnas y filas */
+}
+
+@media (max-width: 768px) {
+    .formGrid {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0.5rem; /* Espacio entre grupos de input, ajustado para el grid */
 }
 
-.fullWidth {
-    grid-column: 1 / -1;
-}
-
-.inputGroup label, .fullWidth label {
-    
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
+.inputGroup label {
     margin-bottom: 0.5rem;
-    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-.inputGroup input,
-.inputGroup select {
-    width: 90%;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--color-border);
+/* Estilos para el contenedor de la promo y el estado */
+.promoAndStatusContainer {
+    margin-bottom: 1rem; /* Espacio debajo de este contenedor antes del resumen de precios */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Contenedor del input de promoción y botón */
+.promoContainer {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end; /* Alinea el input y el botón en la parte inferior */
+    width: 100%; /* Important: This makes promoContainer take full width within its flex parent if it's the only item in a column. When inside formGrid, it will behave as a grid item. */
+}
+
+.applyButton {
+    background-color: var(--veranum-blue);
+    color: var(--white);
+    padding: 1rem 1rem;
+    border: none;
     border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.applyButton:hover {
+    background-color: var(--veranum-blue);
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(0, 93, 126, 0.2);
+}
+
+.applyButton:disabled {
+    background-color: var(--neutral-300);
+    color: var(--neutral-500);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.promoMessageWrapper {
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.promoMessage {
+    margin: 0;
+}
+
+.promoMessage.success {
+    background-color: var(green-light);
+    color: var(--success-dark);
+    border: 1px solid var(--success-dark);
+}
+
+.promoMessage.error {
+    background-color: var(--danger-light);
+    color: var(--danger-dark);
+    border: 1px solid var(--danger-dark);
+}
+
+.priceSummary {
+    background-color: var(--color-background-elevated);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.summaryTitle {
+    font-size: 1.3rem;
+    color: var(--color-text-header);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.8rem;
+}
+
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
     font-size: 1rem;
     color: var(--color-text-primary);
-    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.inputGroup input:focus,
-.inputGroup select:focus {
-    outline: none;
-    border-color: var(--veranum-blue);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+.priceRow span:first-child {
+    font-weight: 500;
 }
 
-.inputGroup select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.7rem center;
-    background-size: 1.2rem;
-    cursor: pointer;
+.priceRow.discountRow {
+    color: var(--danger-dark);
+    font-weight: bold;
 }
 
+.divider {
+    border: none;
+    border-top: 1px dashed var(--color-border-strong);
+    margin: 1rem 0;
+}
+
+.totalRow {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--veranum-blue);
+    margin-top: 1.5rem;
+}
+
+
+/* Estilos para el campo de búsqueda */
 .searchableWrapper {
     position: relative;
+    width: 100%;
 }
 
 .searchResults {
     position: absolute;
-    top: 100%;
+    top: 100%; /* Posiciona la lista debajo del input */
     left: 0;
     right: 0;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-top: none;
-    border-radius: 0 0 4px 4px;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10; /* Asegura que la lista esté por encima de otros elementos */
     list-style: none;
     padding: 0;
-    margin: 0;
-    max-height: 160px;
-    overflow-y: auto;
-    z-index: 10;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0.5rem 0 0 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .searchResults li {
-    padding: 0.75rem 1rem;
+    padding: 0.8rem 1rem;
     cursor: pointer;
-    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.searchResults li:last-child {
+    border-bottom: none;
 }
 
 .searchResults li:hover {
-    background-color: var(--color-primary-light);
+    background-color: var(--neutral-100);
+    color: var(--veranum-blue);
 }
 
 .spinner {
     position: absolute;
-    right: 12px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
+    border: 3px solid var(--neutral-300);
+    border-top: 3px solid var(--veranum-blue);
+    border-radius: 50%;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--color-border-light);
-    border-top-color: var(--veranum-blue);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    to { transform: translateY(-50%) rotate(360deg); }
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
 }
 
+.selectedItem {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: var(--veranum-blue-light);
+    color: var(--veranum-blue-dark);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    overflow: hidden; /* Oculta el desbordamiento si el texto es muy largo */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es muy largo */
+}
+
+/* Checkbox group for services */
 .checkboxGroup {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0.8rem;
-    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding: 0.8rem;
     border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: var(--color-background);
+    border-radius: 10px;
+    background-color: var(--neutral-50);
 }
 
 .checkboxLabel {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 0.9rem;
     cursor: pointer;
-}
-
-.checkboxLabel input {
-    transform: scale(1.1);
-    accent-color: var(--veranum-blue);
-    cursor: pointer;
-}
-
-.promoContainer {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.75rem;
-}
-
-.applyButton {
-    padding: 0.8rem 1.2rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    background-color: var(--action-amber);
-    color: var(--neutral-900);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background-color 0.2s ease;
-}
-
-.applyButton:hover {
-    background-color: #ffb703;
-}
-
-.applyButton:disabled {
-    background-color: var(--neutral-300);
-    cursor: not-allowed;
-}
-
-.promoMessage {
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin: 0.25rem 0 0 0;
-    padding-left: 0.2rem;
-}
-
-.promoMessage.success { color: var(--success-green); }
-.promoMessage.error { color: var(--error-red); }
-
-.priceSummary {
-    grid-column: 1 / -1;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    padding: 1.5rem;
-    margin-top: 1rem;
-}
-
-.summaryTitle {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    display: block;
-    border-bottom: 1px solid var(--color-border-light);
-    padding-bottom: 1rem;
-}
-
-.priceRow { 
-    display: flex; 
-    justify-content: space-between; 
-    padding: 0.5rem 0.25rem; 
+    color: var(--color-text-primary);
     font-size: 0.95rem;
 }
 
-.discountRow { 
-    color: var(--success-green); 
-    font-weight: 600;
+.checkboxLabel input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--veranum-blue); /* Color del checkbox */
 }
 
-.divider { 
-    border: none; 
-    border-top: 1px solid var(--color-border-light); 
-    margin: 0.75rem 0; 
-}
-
-.totalRow {
+/* Estilos para el pie de página del modal (botones de acción) */
+.modalFooter {
     display: flex;
-    justify-content: space-between;
-    padding-top: 0.75rem;
-    font-size: 1.3rem; 
-    font-weight: 700; 
-    color: var(--color-text-header);
-}
-
-.buttonGroup {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2.5rem;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border-light);
+    border-top: 1px solid var(--color-border);
 }
 
-.cancelButton, .saveButton {
-    padding: 0.8rem 1.8rem;
-    border: none;
-    border-radius: 4px;
+.modalFooter button {
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.2s ease;
+    /* Ensure solid background colors */
+    border: none; /* Remove default border to allow solid background */
 }
 
-.cancelButton {
-    background-color: var(--neutral-200);
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-border);
-}
+.nextButton, .prevButton, .saveButton { /* Combined for solid blue background */
 
-.cancelButton:hover {
-    background-color: var(--neutral-300);
-    border-color: var(--color-border-strong);
-}
+    background-color: var(--veranum-blue); /* Solid blue */
 
-.saveButton {
-    background-color: var(--veranum-blue);
     color: var(--white);
+    
 }
 
-.saveButton:hover {
-
+.nextButton:hover, .prevButton:hover, .saveButton:hover {
+    background-color: var(--veranum-blue); /* Darker blue on hover */
     box-shadow: 0 2px 8px rgba(0, 93, 126, 0.3);
 }
 
+.nextButton:disabled, .prevButton:disabled, .saveButton:disabled {
+    background-color: var(--neutral-300);
+    color: var(--neutral-500);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.cancelButton {
+    background-color: var(--error-red);
+    color: var(--white); /* White text for contrast */
+    border: none;
+}
+
+.cancelButton:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Asegúrate de que los estilos generales para input/select/textarea no anulen esto de forma no deseada */
 .inputGroup input,
 .inputGroup select,
 .fullWidth input,
@@ -306,20 +358,35 @@
 
 .inputGroup textarea,
 .fullWidth textarea {
-    resize: vertical; /* Permite redimensionar verticalmente los textarea */
+    resize: vertical;
+    min-height: 80px;
 }
 
 .inputGroup input:focus,
 .inputGroup select:focus,
 .fullWidth input:focus,
 .fullWidth textarea:focus {
-    outline: none;
     border-color: var(--veranum-blue);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 93, 126, 0.2);
+    outline: none;
 }
 
-.inputDisabled {
-    background-color: var(--color-background-muted) !important;
-    color: var(--color-text-muted) !important;
-    cursor: not-allowed;
+.inputError {
+    border-color: var(--danger-dark) !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2) !important;
+}
+
+.inputErrorMessage {
+    color: var(--danger-dark);
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+}
+
+.inputSuccess {
+    border-color: var(--success-dark) !important;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2) !important;
+}
+
+.fullWidth {
+    grid-column: 1 / -1; /* Ocupa todas las columnas disponibles en un grid */
 }
