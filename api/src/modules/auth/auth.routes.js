@@ -5,8 +5,8 @@ const { register, login, getMe } = require('./auth.controller.js');
 const { protect } = require('../../middleware/auth.middleware.js');
 const { loginLimiter } = require('../../middleware/rateLimit.middleware.js'); // Importar el limitador
 
-// Ruta para registrar un nuevo usuario: POST /api/auth/register (También puede tener un limitador)
-// router.post('/register', apiLimiter, register); // Puedes aplicar un limitador general si quieres
+// Ruta para registrar un nuevo usuario: POST /api/auth/register
+router.post('/register', register); // <-- Habilitar la ruta de registro sin apiLimiter
 
 // Ruta para iniciar sesión: POST /api/auth/login
 router.post('/login', loginLimiter, login); // Aplicar el limitador de login

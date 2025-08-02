@@ -17,7 +17,7 @@ const validateRun = (run) => {
 
 const validateEmail = (email) => {
   if (!email) return 'El correo electrónico es obligatorio.';
-  const emailRegex = /^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$/;
+  const emailRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/;
   if (!emailRegex.test(email)) return 'El formato del correo electrónico no es válido.';
   return '';
 };
